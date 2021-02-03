@@ -2,4 +2,4 @@ version: 0.0
 os: linux
 files:
   - source: /
-    detination: /home/ec2-user/app/deploy/
+    detination: /home/ec2-user/app/deploy
