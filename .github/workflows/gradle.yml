@@ -34,9 +34,17 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
+      # Jar 파일 Copy
+      - name: Copy Jar
+        run: cp ./build/libs/*.jar ./deploy/
+
+      # appspec.yml Copy
+      - name: Copy appspec
+        run: cp appspec.yml ./deploy/
+
       # make zip
       - name: Make zip
-        run: zip -qq -r ./$GITHUB_SHA.zip .
+        run: zip -qq -r -j ./$GITHUB_SHA.zip ./deploy
 
       # S3 Bucket으로 copy
       - name: Deliver to AWS S3
