@@ -46,9 +46,13 @@ jobs:
       - name: Copy appspec
         run: cp appspec.yml ./deploy/
 
+      # script file Copy
+      - name: Copy shell
+        run: cp ./scripts/* ./deploy/
+
       # make zip
       - name: Make zip
-        run: zip -qq -r -j ./$GITHUB_SHA.zip ./deploy
+        run: zip -qq -r -j ./springboot-build.zip ./deploy
 
       # S3 Bucket으로 copy
       - name: Deliver to AWS S3
@@ -59,7 +63,7 @@ jobs:
           aws s3 cp \
           --region ap-northeast-2 \
           --acl private \
-          ./$GITHUB_SHA.zip s3://moon-springboot-build/
+          ./springboot-build.zip s3://moon-springboot-build/
 
       # Deploy
       - name: Deploy test
@@ -71,5 +75,5 @@ jobs:
           --application-name springboot2-webservice \
           --deployment-group-name springboot2-webservice-group \
           --file-exists-behavior OVERWRITE \
-          --s3-location bucket=moon-springboot-build,bundleType=zip,key=$GITHUB_SHA.zip \
+          --s3-location bucket=moon-springboot-build,bundleType=zip,key=springboot-build.zip \
           --region ap-northeast-2
