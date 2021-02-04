@@ -8,7 +8,7 @@ ABSDIR=$(dirname $ABSPATH)
 source ${ABSDIR}/profile.sh
 
 REPOSITORY=/home/ec2-user/app
-PROJECT_NAME=springboot-intro
+PROJECT_NAME=springold
 
 echo "> Build 파일 복사"
 echo "> cp $REPOSITORY/deploy/*.jar $REPOSITORY/"
